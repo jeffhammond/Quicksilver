@@ -100,19 +100,19 @@ bool CollisionEvent(MonteCarlo* monteCarlo, MC_Particle &mc_particle, unsigned i
    //--------------------------------------------------------------------------------------------------------------
 
    // Set the reaction for this particle.
-   ATOMIC_UPDATE( monteCarlo->_tallies->_balanceTask[tally_index]._collision );
+   ATOMIC_INCREMENT( monteCarlo->_tallies->_balanceTask[tally_index]._collision );
    NuclearDataReaction::Enum reactionType = monteCarlo->_nuclearData->_isotopes[selectedUniqueNumber]._species[0].\
            _reactions[selectedReact]._reactionType;
    switch (reactionType)
    {
       case NuclearDataReaction::Scatter:
-         ATOMIC_UPDATE( monteCarlo->_tallies->_balanceTask[tally_index]._scatter);
+         ATOMIC_INCREMENT( monteCarlo->_tallies->_balanceTask[tally_index]._scatter);
          break;
       case NuclearDataReaction::Absorption:
-         ATOMIC_UPDATE( monteCarlo->_tallies->_balanceTask[tally_index]._absorb);
+         ATOMIC_INCREMENT( monteCarlo->_tallies->_balanceTask[tally_index]._absorb);
          break;
       case NuclearDataReaction::Fission:
-         ATOMIC_UPDATE( monteCarlo->_tallies->_balanceTask[tally_index]._fission);
+         ATOMIC_INCREMENT( monteCarlo->_tallies->_balanceTask[tally_index]._fission);
          ATOMIC_ADD( monteCarlo->_tallies->_balanceTask[tally_index]._produce, nOut);
          break;
       case NuclearDataReaction::Undefined:

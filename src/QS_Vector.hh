@@ -180,7 +180,7 @@ class qs_vector
    {
        int pos;
 
-       ATOMIC_CAPTURE( _size, inc, pos );
+       ATOMIC_FETCH_ADD( _size, inc, pos );
 
        return pos;
    }

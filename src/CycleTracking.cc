@@ -50,7 +50,7 @@ void CycleTrackingFunction( MonteCarlo *monteCarlo, MC_Particle &mc_particle, in
 #endif   
         MC_Segment_Outcome_type::Enum segment_outcome = MC_Segment_Outcome(monteCarlo, mc_particle, flux_tally_index);
 
-        ATOMIC_UPDATE( monteCarlo->_tallies->_balanceTask[tally_index]._numSegments);
+        ATOMIC_INCREMENT( monteCarlo->_tallies->_balanceTask[tally_index]._numSegments);
 
         mc_particle.num_segments += 1.;  /* Track the number of segments this particle has
                                             undergone this cycle on all processes. */
@@ -82,7 +82,7 @@ void CycleTrackingFunction( MonteCarlo *monteCarlo, MC_Particle &mc_particle, in
                 }
                 else if (facet_crossing_type == MC_Tally_Event::Facet_Crossing_Escape)
                 {
-                    ATOMIC_UPDATE( monteCarlo->_tallies->_balanceTask[tally_index]._escape);
+                    ATOMIC_INCREMENT( monteCarlo->_tallies->_balanceTask[tally_index]._escape);
                     mc_particle.last_event = MC_Tally_Event::Facet_Crossing_Escape;
                     mc_particle.species = -1;
                     keepTrackingThisParticle = false;
@@ -105,7 +105,7 @@ void CycleTrackingFunction( MonteCarlo *monteCarlo, MC_Particle &mc_particle, in
             {
                 // The particle has reached the end of the time step.
                 processedVault->pushParticle(mc_particle);
-                ATOMIC_UPDATE( monteCarlo->_tallies->_balanceTask[tally_index]._census);
+                ATOMIC_INCREMENT( monteCarlo->_tallies->_balanceTask[tally_index]._census);
                 keepTrackingThisParticle = false;
                 break;
             }

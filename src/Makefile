@@ -94,9 +94,9 @@ SHELL = /bin/bash
 # Set your desired C++ compiler and any necessary flags.
 # The interpretation of each of these four variables is described above.
 # A number of examples for machines we regularly run on are given below.
-CXX = 
-CXXFLAGS =
-CPPFLAGS = 
+CXX = mpicxx
+CXXFLAGS = -O2 -ffast-math -std=c++17
+CPPFLAGS =
 LDFLAGS =
 
 ###############################################################################
