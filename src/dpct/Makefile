@@ -3,7 +3,8 @@ SHELL = /bin/bash
 CXX       = dpcpp
 CXXFLAGS  = -std=c++14
 CXXFLAGS += -O3
-CPPFLAGS  =
+CXXFLAGS += -ferror-limit=1
+CPPFLAGS += -DHAVE_SYCL
 LDFLAGS   =
 
 EXT = .cc
