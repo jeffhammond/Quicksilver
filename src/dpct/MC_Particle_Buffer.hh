@@ -1,10 +1,9 @@
 #ifndef MC_PARTICLE_BUFFER_INCLUDE
 #define MC_PARTICLE_BUFFER_INCLUDE
 
+#include <map>
 #include <list>
 
-#include <CL/sycl.hpp>
-#include <dpct/dpct.hpp>
 #include "MC_Processor_Info.hh"
 #include "MC_Base_Particle.hh"
 #include "utilsMpi.hh"

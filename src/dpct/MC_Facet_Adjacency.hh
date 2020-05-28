@@ -1,8 +1,6 @@
 #ifndef MCT_FACET_ADJACENCY_INCLUDE
 #define MCT_FACET_ADJACENCY_INCLUDE
 
-#include <CL/sycl.hpp>
-#include <dpct/dpct.hpp>
 #include "MC_Location.hh"
 #include "macros.hh"
 

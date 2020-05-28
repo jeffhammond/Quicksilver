@@ -1,5 +1,6 @@
 #include <CL/sycl.hpp>
 #include <dpct/dpct.hpp>
+
 #include "cudaFunctions.hh"
 #include "cudaUtils.hh"
 

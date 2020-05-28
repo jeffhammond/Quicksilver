@@ -1,5 +1,3 @@
-#include <CL/sycl.hpp>
-#include <dpct/dpct.hpp>
 #include "MC_Particle_Buffer.hh"
 #include "utilsMpi.hh"
 #include "ParticleVaultContainer.hh"

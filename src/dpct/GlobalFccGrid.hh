@@ -1,8 +1,8 @@
 #ifndef GLOBAL_FCC_GRID_HH
 #define GLOBAL_FCC_GRID_HH
 
-#include <CL/sycl.hpp>
-#include <dpct/dpct.hpp>
+#include <vector>
+
 #include "TupleToIndex.hh"
 #include "IndexToTuple.hh"
 #include "Tuple4ToIndex.hh"

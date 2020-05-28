@@ -1,5 +1,7 @@
-#include <CL/sycl.hpp>
-#include <dpct/dpct.hpp>
+#include <cmath>
+
+#include <vector>
+
 #include "MC_SourceNow.hh"
 #include "QS_Vector.hh"
 #include "utils.hh"
@@ -18,7 +20,6 @@
 #include "macros.hh"
 #include "AtomicMacro.hh"
 #include "NVTX_Range.hh"
-#include <cmath>
 
 namespace
 {

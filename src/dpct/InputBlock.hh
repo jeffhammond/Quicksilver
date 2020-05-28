@@ -1,8 +1,17 @@
 #ifndef INPUT_BLOCK_HH
 #define INPUT_BLOCK_HH
 
-#include <CL/sycl.hpp>
-#include <dpct/dpct.hpp>
+#include <cstring>
+
+#include <string>
+#include <sstream>
+#include <vector>
+#include <map>
+
+using std::map;
+using std::ostringstream;
+using std::string;
+
 #include "qs_assert.hh"
 
 class InputBlock

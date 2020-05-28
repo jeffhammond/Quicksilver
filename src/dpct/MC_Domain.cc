@@ -1,9 +1,6 @@
-#include <CL/sycl.hpp>
-#include <dpct/dpct.hpp>
-#include "MC_Domain.hh"
+#include <cmath>
 
-using std::cout;
-using std::endl;
+#include "MC_Domain.hh"
 
 #include "Globals.hh"
 #include "MonteCarlo.hh"
@@ -18,13 +15,6 @@ using std::endl;
 #include "Parameters.hh"
 #include "MaterialDatabase.hh"
 #include "MCT.hh"
-#include <cmath>
-
-using std::vector;
-using std::make_pair;
-using std::map;
-using std::abs;
-using std::string;
 
 namespace
 {

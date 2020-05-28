@@ -1,6 +1,23 @@
 #ifndef MC_DOMAIN_INCLUDE
 #define MC_DOMAIN_INCLUDE
 
+#include <cstdio>
+#include <cmath>
+
+#include <iostream>
+#include <vector>
+#include <tuple>
+#include <map>
+#include <string>
+
+using std::cout;
+using std::endl;
+using std::vector;
+using std::make_pair;
+using std::map;
+using std::abs;
+using std::string;
+
 
 #include "QS_Vector.hh"
 #include "MC_Facet_Adjacency.hh"

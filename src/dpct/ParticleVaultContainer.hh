@@ -1,10 +1,9 @@
 #ifndef PARTICLEVAULTCONTAINER_HH
 #define PARTICLEVAULTCONTAINER_HH
 
-#include <CL/sycl.hpp>
-#include <dpct/dpct.hpp>
-#include "DeclareMacro.hh"
+#include <vector>
 
+#include "DeclareMacro.hh"
 #include "portability.hh"
 #include "QS_Vector.hh"
 

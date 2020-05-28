@@ -1,8 +1,7 @@
 #ifndef PARSE_UTILS_HH
 #define PARSE_UTILS_HH
 
-#include <CL/sycl.hpp>
-#include <dpct/dpct.hpp>
+#include <string>
 
 class InputBlock;
 

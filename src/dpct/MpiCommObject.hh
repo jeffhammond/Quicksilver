@@ -1,8 +1,6 @@
 #ifndef MPI_COMM_OBJECT_HH
 #define MPI_COMM_OBJECT_HH
 
-#include <CL/sycl.hpp>
-#include <dpct/dpct.hpp>
 #include "CommObject.hh"
 
 #include "utilsMpi.hh"

@@ -1,8 +1,6 @@
 #ifndef MC_STUBS_MPI_H
 #define MC_STUBS_MPI_H
 
-#include <CL/sycl.hpp>
-#include <dpct/dpct.hpp>
 // for uint64_t
 
 #define MPI_STUBS_MAX_BLOCKS (1024)

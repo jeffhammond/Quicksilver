@@ -1,8 +1,7 @@
 #ifndef COMM_OBJECT_HH
 #define COMM_OBJECT_HH
 
-#include <CL/sycl.hpp>
-#include <dpct/dpct.hpp>
+#include <set>
 
 #include "MeshPartition.hh"
 #include "Long64.hh"

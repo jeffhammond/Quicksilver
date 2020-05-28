@@ -4,8 +4,6 @@
 
 // ToDo:  How much chaos would be caused by removing the default constructor?
 
-#include <CL/sycl.hpp>
-#include <dpct/dpct.hpp>
 #include "DeclareMacro.hh"
 
 class  MC_Domain;

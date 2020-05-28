@@ -1,6 +1,3 @@
-#include <CL/sycl.hpp>
-#include <dpct/dpct.hpp>
-
 #ifdef DPCPP_COMPATIBILITY_TEMP
 #define qs_assert( cond) \
    do \

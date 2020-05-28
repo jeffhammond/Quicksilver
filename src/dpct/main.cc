@@ -1,5 +1,3 @@
-#include <CL/sycl.hpp>
-#include <dpct/dpct.hpp>
 #include "utils.hh"
 #include "Parameters.hh"
 #include "utilsMpi.hh"

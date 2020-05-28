@@ -1,10 +1,16 @@
 #ifndef GRID_ASSIGNMENT_OBJECT_HH
 #define GRID_ASSIGNMENT_OBJECT_HH
 
+#include <cmath>
+#include <vector>
 #include <queue>
 
-#include <CL/sycl.hpp>
-#include <dpct/dpct.hpp>
+using std::vector;
+using std::queue;
+using std::min;
+using std::max;
+using std::floor;
+
 #include "MC_Vector.hh"
 #include "Tuple.hh"
 

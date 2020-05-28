@@ -7,10 +7,10 @@
 /// \author Sriram Swaminarayan
 /// \date July 24, 2007
 
-#include <CL/sycl.hpp>
-#include <dpct/dpct.hpp>
-#include "cmdLineParser.hh"
+#include <cstdio>
+#include <cstring>
 
+#include "cmdLineParser.hh"
 #include "memUtils.hh"
 
 #define nextOption(o) ((MyOption*) o->next)

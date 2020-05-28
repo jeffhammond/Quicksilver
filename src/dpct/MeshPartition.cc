@@ -1,5 +1,3 @@
-#include <CL/sycl.hpp>
-#include <dpct/dpct.hpp>
 #include "MeshPartition.hh"
 
 #include "qs_assert.hh"
@@ -7,12 +5,6 @@
 #include "MC_Vector.hh"
 #include "GridAssignmentObject.hh"
 #include "CommObject.hh"
-
-using std::make_pair;
-using std::map;
-using std::vector;
-using std::queue;
-using std::set;
 
 namespace
 {

@@ -1,5 +1,3 @@
-#include <CL/sycl.hpp>
-#include <dpct/dpct.hpp>
 #ifndef DECLAREMACRO_HH
 #define DECLAREMACRO_HH
 

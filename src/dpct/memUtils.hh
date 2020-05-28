@@ -4,8 +4,7 @@
 #ifndef MEMUTILS_HH
 #define MEMUTILS_HH
 
-#include <CL/sycl.hpp>
-#include <dpct/dpct.hpp>
+#include <cstdlib>
 
 static void* qsMalloc(size_t iSize)
 {

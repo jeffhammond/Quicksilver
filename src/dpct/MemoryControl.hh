@@ -1,8 +1,9 @@
 #ifndef MEMORY_CONTROL_HH
 #define MEMORY_CONTROL_HH
 
-#include <CL/sycl.hpp>
-#include <dpct/dpct.hpp>
+#include <cstdio>
+#include <cstdlib>
+
 #include "cudaUtils.hh"
 
 #include "qs_assert.hh"

@@ -13,9 +13,6 @@
 #ifndef NVTX_RANGE_HH
 #define NVTX_RANGE_HH
 
-#include <CL/sycl.hpp>
-#include <dpct/dpct.hpp>
-
 #ifdef USE_NVTX
 #include "nvToolsExt.h"
 #endif

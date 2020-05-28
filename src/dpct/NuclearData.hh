@@ -1,10 +1,9 @@
 #ifndef NUCLEAR_DATA_HH
 #define NUCLEAR_DATA_HH
 
-#include <CL/sycl.hpp>
-#include <dpct/dpct.hpp>
-#include "QS_Vector.hh"
+#include <cstdint>
 #include <algorithm>
+#include "QS_Vector.hh"
 #include "qs_assert.hh"
 #include "DeclareMacro.hh"
 

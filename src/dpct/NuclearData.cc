@@ -1,12 +1,11 @@
-#include <CL/sycl.hpp>
-#include <dpct/dpct.hpp>
+#include <cmath>
+using std::log10;
+using std::pow;
+
 #include "NuclearData.hh"
 #include "MC_RNG_State.hh"
 #include "DeclareMacro.hh"
 #include "qs_assert.hh"
-
-using std::log10;
-using std::pow;
 
 // Set the cross section values and reaction type
 // Cross sections are scaled to produce the supplied reactionCrossSection at 1MeV.

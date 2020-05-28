@@ -1,8 +1,6 @@
 #ifndef MACROS_HH
 #define MACROS_HH
 
-#include <CL/sycl.hpp>
-#include <dpct/dpct.hpp>
 #include "qs_assert.hh"
 #include <algorithm>
 

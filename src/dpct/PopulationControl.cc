@@ -1,5 +1,5 @@
-#include <CL/sycl.hpp>
-#include <dpct/dpct.hpp>
+#include <cmath>
+
 #include "PopulationControl.hh"
 #include "MC_Processor_Info.hh"
 #include "MonteCarlo.hh"
@@ -9,7 +9,6 @@
 #include "ParticleVault.hh"
 #include "utilsMpi.hh"
 #include "NVTX_Range.hh"
-#include <cmath>
 
 namespace
 {

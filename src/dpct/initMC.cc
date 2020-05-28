@@ -1,5 +1,3 @@
-#include <CL/sycl.hpp>
-#include <dpct/dpct.hpp>
 #include "initMC.hh"
 #include "QS_Vector.hh"
 #include "utilsMpi.hh"
@@ -19,14 +17,6 @@
 #include "MC_Base_Particle.hh"
 #include "cudaUtils.hh"
 #include "cudaFunctions.hh"
-
-using std::vector;
-using std::string;
-using std::set;
-using std::cout;
-using std::endl;
-using std::map;
-using std::make_pair;
 
 namespace
 {

@@ -1,5 +1,6 @@
-#include <CL/sycl.hpp>
-#include <dpct/dpct.hpp>
+#include <cstdio>
+#include <string>
+
 #include "MC_Segment_Outcome.hh"
 #include "MC_Nearest_Facet.hh"
 #include "MC_Location.hh"

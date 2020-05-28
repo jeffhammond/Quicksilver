@@ -6,9 +6,16 @@
 
 #include <string>
 #include <fstream>
+#include <vector>
+#include <map>
 
-#include <CL/sycl.hpp>
-#include <dpct/dpct.hpp>
+using std::string;
+using std::ifstream;
+using std::make_pair;
+using std::vector;
+using std::ostream;
+using std::map;
+using std::endl;
 
 struct GeometryParameters
 {

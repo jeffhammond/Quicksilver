@@ -1,5 +1,7 @@
-#include <CL/sycl.hpp>
-#include <dpct/dpct.hpp>
+#include <vector>
+
+using std::vector;
+
 #include "Tallies.hh"
 #include "utilsMpi.hh"
 #include "MC_Time_Info.hh"
@@ -7,8 +9,6 @@
 #include "MonteCarlo.hh"
 #include "Globals.hh"
 #include "MC_Fast_Timer.hh"
-
-using std::vector;
 
 void Tallies::CycleInitialize(MonteCarlo* monteCarlo)
 {

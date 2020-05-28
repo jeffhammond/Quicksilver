@@ -4,8 +4,7 @@
 #ifdef CSTDINT_MISSING
 #include <stdint.h>
 #else
-#include <CL/sycl.hpp>
-#include <dpct/dpct.hpp>
+#include <cstdint>
 #endif
 
 #endif

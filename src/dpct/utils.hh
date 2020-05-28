@@ -2,9 +2,7 @@
 #define UTILS_HH
 
 #include <cinttypes>
-
-#include <CL/sycl.hpp>
-#include <dpct/dpct.hpp>
+#include <string>
 
 int mc_get_num_physical_procs(void);
 

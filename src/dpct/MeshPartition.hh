@@ -1,9 +1,19 @@
 #ifndef MESH_PARTITION_HH
 #define MESH_PARTITION_HH
 
-#include <CL/sycl.hpp>
-#include <dpct/dpct.hpp>
+#include <tuple>
+#include <vector>
+#include <queue>
+#include <map>
+#include <set>
+
 #include "Long64.hh"
+
+using std::make_pair;
+using std::map;
+using std::vector;
+using std::queue;
+using std::set;
 
 class MC_Vector;
 class GlobalFccGrid;

@@ -1,5 +1,3 @@
-#include <CL/sycl.hpp>
-#include <dpct/dpct.hpp>
 // Determine which atomics to use based on platform being compiled for
 //
 // If compiling with CUDA
@@ -14,15 +12,14 @@
 #if defined (HAVE_CUDA)
 
     //If in a CUDA GPU section use the CUDA atomics
-#ifdef DPCPP_COMPATIBILITY_TEMP
+    #ifdef DPCPP_COMPATIBILITY_TEMP
 
         //Currently not atomic here. But its only used when it does not necissarially need to be atomic.
         #define ATOMIC_WRITE( x, v ) \
-            x = v;          
+            x = v;
 
         #define ATOMIC_ADD( x, v ) \
             atomicAdd( &x, v );
-        
         #define ATOMIC_UPDATE( x ) \
             atomicAdd( &x, 1 );
 

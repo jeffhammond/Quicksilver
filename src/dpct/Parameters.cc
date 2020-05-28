@@ -22,24 +22,13 @@
 //     the arguments.  Also general improvement of the code structure.
 //
 // 6.  Implement anything marked with qs_assert(false)
-#include <CL/sycl.hpp>
-#include <dpct/dpct.hpp>
+
 #include "Parameters.hh"
-
 #include "qs_assert.hh"
-
 #include "cmdLineParser.hh"
 #include "parseUtils.hh"
 #include "InputBlock.hh"
 #include "utilsMpi.hh"
-
-using std::string;
-using std::ifstream;
-using std::make_pair;
-using std::vector;
-using std::ostream;
-using std::map;
-using std::endl;
 
 namespace
 {

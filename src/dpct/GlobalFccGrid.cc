@@ -1,14 +1,14 @@
-#include <CL/sycl.hpp>
-#include <dpct/dpct.hpp>
-#include "GlobalFccGrid.hh"
-#include <algorithm>
-#include "MC_Vector.hh"
-#include "Tuple.hh"
 #include <cmath>
+#include <vector>
+#include <algorithm>
 
 using std::vector;
 using std::min;
 using std::max;
+
+#include "GlobalFccGrid.hh"
+#include "MC_Vector.hh"
+#include "Tuple.hh"
 
 namespace
 {

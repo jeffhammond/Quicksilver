@@ -1,11 +1,4 @@
-#include <CL/sycl.hpp>
-#include <dpct/dpct.hpp>
 #include "InputBlock.hh"
-
-using std::map;
-using std::ostringstream;
-using std::string;
-
 
 InputBlock::InputBlock(const string& blockName)
 :_blockName(blockName)

@@ -9,8 +9,6 @@
 #ifndef MPI_STUBS_INTERNAL_H
 #define MPI_STUBS_INTERNAL_H
 
-#include <CL/sycl.hpp>
-#include <dpct/dpct.hpp>
 #include "mpi_stubs.hh"
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -42,7 +40,7 @@ typedef struct _Listitem
 
 } Listitem;
 
-typedef struct dpct_type_3a6371
+typedef struct comm_thingy
 {
   pList sendlist;
   pList recvlist;
@@ -52,7 +50,7 @@ typedef struct dpct_type_3a6371
 
 } Comm;
 
-typedef struct dpct_type_cb8f75
+typedef struct req_thingy
 {
   pListitem listitem;        // to allow Req to be removed from list
 

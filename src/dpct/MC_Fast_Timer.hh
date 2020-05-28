@@ -1,10 +1,7 @@
 #ifndef MC_FAST_TIMER_INCLUDE
 #define MC_FAST_TIMER_INCLUDE
 
-#include <CL/sycl.hpp>
-#include <dpct/dpct.hpp>
-#ifndef CHRONO_MISSING
-#endif
+#include <chrono>
 
 #include "portability.hh"   // needed for uint64_t in this file
 #include "utilsMpi.hh"      // needed for MPI_Comm type in this file

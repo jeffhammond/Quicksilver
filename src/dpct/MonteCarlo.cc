@@ -1,5 +1,3 @@
-#include <CL/sycl.hpp>
-#include <dpct/dpct.hpp>
 #include "MonteCarlo.hh"
 #include "NuclearData.hh"
 #include "MaterialDatabase.hh"

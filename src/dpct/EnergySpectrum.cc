@@ -1,5 +1,7 @@
-#include <CL/sycl.hpp>
-#include <dpct/dpct.hpp>
+#include <string>
+
+using std::string;
+
 #include "EnergySpectrum.hh"
 #include "MonteCarlo.hh"
 #include "ParticleVault.hh"
@@ -7,8 +9,6 @@
 #include "utilsMpi.hh"
 #include "MC_Processor_Info.hh"
 #include "Parameters.hh"
-
-using std::string;
 
 void EnergySpectrum::UpdateSpectrum(MonteCarlo* monteCarlo)
 {

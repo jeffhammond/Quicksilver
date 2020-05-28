@@ -2,7 +2,7 @@
 #define DIRECTION_COSINE_INCLUDE
 
 #include <CL/sycl.hpp>
-#include <dpct/dpct.hpp>
+
 #include "portability.hh"
 #include "DeclareMacro.hh"
 

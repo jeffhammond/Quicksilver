@@ -1,10 +1,9 @@
-#include <CL/sycl.hpp>
-#include <dpct/dpct.hpp>
+#include <cstdarg>
+
 #include "utils.hh"
 #include "qs_assert.hh"
 #include "utilsMpi.hh"
 #include "macros.hh"
-#include <stdarg.h>
 #include "MonteCarlo.hh"
 #include "Globals.hh"
 #include "MC_Processor_Info.hh"

@@ -1,15 +1,11 @@
-#include <CL/sycl.hpp>
-#include <dpct/dpct.hpp>
-#include "DecompositionObject.hh"
+#include <cstdio>
+
+#include <set>
 #include <algorithm>
+
+#include "DecompositionObject.hh"
 #include "qs_assert.hh"
 
-using std::vector;
-using std::find;
-using std::swap;
-using std::pair;
-using std::set;
-using std::make_pair;
 namespace
 {
    void fisherYates(vector<int>& vv)

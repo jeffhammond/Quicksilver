@@ -1,8 +1,6 @@
 #ifndef MC_CELL_STATE_INCLUDE
 #define MC_CELL_STATE_INCLUDE
 
-#include <CL/sycl.hpp>
-#include <dpct/dpct.hpp>
 #include "QS_Vector.hh"
 #include "macros.hh"
 

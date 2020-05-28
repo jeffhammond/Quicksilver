@@ -1,8 +1,6 @@
 #ifndef PARTICLEVAULT_HH
 #define PARTICLEVAULT_HH
 
-#include <CL/sycl.hpp>
-#include <dpct/dpct.hpp>
 #include "MC_Base_Particle.hh"
 #include "QS_Vector.hh"
 #include "DeclareMacro.hh"

@@ -1,7 +1,8 @@
 #ifndef ENERGYSPECTRUM_HH
 #define ENERGYSPECTRUM_HH
-#include <CL/sycl.hpp>
-#include <dpct/dpct.hpp>
+
+#include <string>
+#include <vector>
 
 class MonteCarlo;
 

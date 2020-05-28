@@ -1,5 +1,5 @@
 #include <CL/sycl.hpp>
-#include <dpct/dpct.hpp>
+
 #include "CollisionEvent.hh"
 #include "MC_Particle.hh"
 #include "NuclearData.hh"

@@ -6,6 +6,7 @@
 #include "qs_assert.hh"
 #include "MemoryControl.hh"
 
+#include <vector>
 #include <algorithm>
 
 template <class T>

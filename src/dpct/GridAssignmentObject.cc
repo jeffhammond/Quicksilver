@@ -1,17 +1,10 @@
-#include <CL/sycl.hpp>
-#include <dpct/dpct.hpp>
-#include "GridAssignmentObject.hh"
 #include <algorithm>
-#include "qs_assert.hh"
 #include <cmath>
 
-#define DIFFSQ(a,b) (MC_Vector(a-b).Dot(MC_Vector(a-b)))
+#include "GridAssignmentObject.hh"
+#include "qs_assert.hh"
 
-using std::vector;
-using std::queue;
-using std::min;
-using std::max;
-using std::floor;
+#define DIFFSQ(a,b) (MC_Vector(a-b).Dot(MC_Vector(a-b)))
 
 /** The present implementation of GridAssignmentObject is judged to be
  *  sufficiently fast to meet the needs of initial assignment of

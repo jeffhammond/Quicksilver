@@ -3,9 +3,6 @@
 
 #include <cinttypes>
 
-#include <CL/sycl.hpp>
-#include <dpct/dpct.hpp>
-
 #include "DirectionCosine.hh"
 #include "Tallies.hh"
 

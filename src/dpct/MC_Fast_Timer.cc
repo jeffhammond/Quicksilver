@@ -1,11 +1,10 @@
-#include <CL/sycl.hpp>
-#include <dpct/dpct.hpp>
+#include <cmath>
+
 #include "MC_Fast_Timer.hh"
 #include "MonteCarlo.hh"
 #include "MC_Processor_Info.hh"
 #include "Globals.hh"
 #include "portability.hh"
-#include <cmath>
 
 const char *mc_fast_timer_names[MC_Fast_Timer::Num_Timers] =
 {

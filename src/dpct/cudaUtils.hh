@@ -1,11 +1,6 @@
 #ifndef CUDAUTILS_HH
 #define CUDAUTILS_HH
 
-#if defined(HAVE_CUDA) || defined(HAVE_OPENMP_TARGET)
-#include <CL/sycl.hpp>
-#include <dpct/dpct.hpp>
-#endif
-
 #ifdef HAVE_OPENMP_TARGET
     #ifdef USE_OPENMP_NO_GPU
         #define VAR_MEM MemoryControl::AllocationPolicy::HOST_MEM

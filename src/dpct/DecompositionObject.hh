@@ -1,8 +1,17 @@
 #ifndef DECOMPOSITION_OBJECT_HH
 #define DECOMPOSITION_OBJECT_HH
 
-#include <CL/sycl.hpp>
-#include <dpct/dpct.hpp>
+#include <tuple>
+#include <set>
+#include <vector>
+#include <algorithm>
+
+using std::vector;
+using std::find;
+using std::swap;
+using std::pair;
+using std::set;
+using std::make_pair;
 
 class DecompositionObject
 {

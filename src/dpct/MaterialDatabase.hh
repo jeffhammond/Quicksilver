@@ -1,8 +1,6 @@
 #ifndef MATERIALDATABASE_HH
 #define MATERIALDATABASE_HH
 
-#include <CL/sycl.hpp>
-#include <dpct/dpct.hpp>
 #include "qs_assert.hh"
 
 // For this material, store the global id in NuclearData of the isotope

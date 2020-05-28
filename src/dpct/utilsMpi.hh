@@ -1,6 +1,9 @@
 #ifndef UTILS_MPI_HH
 #define UTILS_MPI_HH
 
+#include <cstdio>
+#include <cstdlib>
+
 #ifdef HAVE_MPI
 
 #if defined (GNU_PERMISSIVE)
@@ -52,11 +55,9 @@ void mpiRequestFree    ( MPI_Request *request );
 // HAVE_MPI not defined, define a serial version of  MPI that works for us
 #else
 
-#include <CL/sycl.hpp>
-#include <dpct/dpct.hpp>
 #include "qs_assert.hh"
 
-typedef struct dpct_type_c56a90 {
+typedef struct status_object {
     int count ;
     int MPI_SOURCE ;
     int MPI_TAG ;

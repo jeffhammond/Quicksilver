@@ -1,5 +1,6 @@
-#include <CL/sycl.hpp>
-#include <dpct/dpct.hpp>
+#include <string>
+#include <iostream>
+
 #include "parseUtils.hh"
 #include "InputBlock.hh"
 

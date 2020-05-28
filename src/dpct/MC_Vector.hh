@@ -2,7 +2,6 @@
 #define MC_VECTOR_INCLUDE
 
 #include <CL/sycl.hpp>
-#include <dpct/dpct.hpp>
 #include "DeclareMacro.hh"
 
 HOST_DEVICE_CLASS

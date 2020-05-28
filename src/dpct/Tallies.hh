@@ -3,8 +3,6 @@
 
 #include <cinttypes>
 
-#include <CL/sycl.hpp>
-#include <dpct/dpct.hpp>
 #include "portability.hh"
 #include "QS_Vector.hh"
 #include "NuclearData.hh"

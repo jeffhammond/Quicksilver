@@ -1,10 +1,8 @@
 #ifndef MCT_FACET_GEOMETRY_3D_INCLUDE
 #define MCT_FACET_GEOMETRY_3D_INCLUDE
 
-#include <CL/sycl.hpp>
-#include <dpct/dpct.hpp>
-#include "macros.hh"
 #include <cmath>
+#include "macros.hh"
 
 // NULL
 
