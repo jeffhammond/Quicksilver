@@ -100,73 +100,6 @@ CPPFLAGS =
 LDFLAGS =
 
 ###############################################################################
-# Very simple GCC build with OpenMP but without MPI.  
-# This works on a Macbook (if gcc is installed)
-###############################################################################
-#
-#OPENMP_FLAGS = -DHAVE_OPENMP -fopenmp 
-#OPENMP_LDFLAGS = -fopenmp
-#OPTFLAGS = -g -O2
-#
-#CXX=g++
-#CXXFLAGS = -std=c++11  $(OPTFLAGS) -Wpedantic
-#CPPFLAGS = $(OPENMP_FLAGS)
-#LDFLAGS = $(OPENMP_LDFLAGS) 
-
-
-###############################################################################
-### GCC -- with MPI and OpenMP 
-###############################################################################
-#OPENMP_FLAGS = -DHAVE_OPENMP -fopenmp
-#OPENMP_LDFLAGS = -fopenmp
-#MPI_FLAGS = -DHAVE_MPI
-#OPTFLAGS = -g -O2
-#
-#CXX=mpicxx
-#CXXFLAGS = -std=c++11 $(OPTFLAGS) -Wpedantic
-#CPPFLAGS = $(MPI_FLAGS) $(OPENMP_FLAGS)
-#LDFLAGS = $(OPENMP_LDFLAGS) 
-
-
-###############################################################################
-# LLNL LC BG/Q Comilers                                                       #
-###############################################################################
-### BGQ GNU
-#OPTFLAGS = -g -O2
-##
-#CXX=/usr/local/tools/compilers/ibm/mpicxx-4.8.4
-#CXXFLAGS = -std=c++11 $(OPTFLAGS) 
-#CPPFLAGS = -DCHRONO_MISSING -DHAVE_MPI -DHAVE_OPENMP -fopenmp
-#LDFLAGS  = -fopenmp
-
-
-###############################################################################
-# OpenMP 4.5 on LLNL CORAL EA nodes
-###############################################################################
-## Choose one Cuda path
-##CUDA_PATH = /usr/local/cuda-8.0
-#CUDA_PATH = /usr/tcetmp/packages/cuda-9.0.176
-
-## Choose one of these compilers
-#CXX=mpiclang++-gpu
-#CXX=mpixlC-gpu
-
-## Uncomment next line to run on CPU only (disable GPUs)
-#OPENMP_OFFLOAD_FLAGS = -DUSE_OPENMP_NO_GPU 
-
-#OPENMP_OFFLOAD_FLAGS += -DHAVE_OPENMP_TARGET -mcpu=power8  
-#OPENMP_FLAGS = -DHAVE_OPENMP -fopenmp ${OPENMP_OFFLOAD_FLAGS}
-#OPTFLAGS = -O2
-
-#CUDA_FLAGS = -I${CUDA_PATH}/include/
-#CUDA_LDFLAGS = -L${CUDA_PATH}/lib64/ -lcuda -lcudart
-
-#CXXFLAGS = -std=c++11 $(OPTFLAGS)
-#CPPFLAGS = -DHAVE_MPI $(OPENMP_FLAGS) $(CUDA_FLAGS) 
-#LDFLAGS  = $(CUDA_LDFLAGS)
-
-
-###############################################################################
 # Cuda on LLNL CORAL EA nodes
 ###############################################################################
 ## Choose one Cuda path
@@ -193,61 +126,59 @@ LDFLAGS  = $(CUDA_LDFLAGS)
 LDFLAGS  += -lstdc++
 ##LDFLAGS += ${CUDA_PATH}/lib64/libnvToolsExt.so
 
-
-
-
 ###############################################################################
-# LLNL TOSS GCC + OpenMP (mvapich 2 - version 1.7) [cab]
+# Very simple GCC build with OpenMP but without MPI.  
+# This works on a Macbook (if gcc is installed)
 ###############################################################################
-#OPTFLAGS = -g -O2 
-#OPENMP_FLAGS = -DHAVE_OPENMP -fopenmp 
-#OPENMP_LDFLAGS = -fopenmp
 #
-#CXX = /usr/apps/gnu/4.9.3/bin/mpig++
-#CXXFLAGS = -std=c++0x $(OPTFLAGS) -mpi=mvapich2-gnu-1.7 
-#CPPFLAGS = -DHAVE_MPI $(OPENMP_FLAGS)
-#LDFLAGS = $(OPENMP_LDFLAGS)
+OPENMP_FLAGS = -DHAVE_OPENMP -fopenmp 
+OPENMP_LDFLAGS = -fopenmp
+OPTFLAGS = -g -O2
+#
+CXX=g++
+CXXFLAGS = -std=c++11  $(OPTFLAGS) -Wpedantic
+CPPFLAGS = $(OPENMP_FLAGS)
+LDFLAGS = $(OPENMP_LDFLAGS) 
+
 
 ###############################################################################
-# LLNL TOSS Intel + OpenMP (mvapich 2 - version 2.1) [quartz] 
+### GCC -- with MPI and OpenMP 
 ###############################################################################
-#OPENMP_FLAGS = -DHAVE_OPENMP -qopenmp 
-#OPENMP_LDFLAGS = -qopenmp 
+#OPENMP_FLAGS = -DHAVE_OPENMP -fopenmp
+#OPENMP_LDFLAGS = -fopenmp
+#MPI_FLAGS = -DHAVE_MPI
 #OPTFLAGS = -g -O2
 #
-#CXX=/usr/local/bin/mpiicpc-17.0.174
-#CXXFLAGS = -std=c++11 -mpi=mvapich2-intel-2.1 -DHAVE_MPI $(OPENMP_FLAGS)
-#CXXFLAGS += -wd1128 -wd64 -wd21
-#LDFLAGS  = $(OPENMP_LDFLAGS)
+#CXX=mpicxx
+#CXXFLAGS = -std=c++11 $(OPTFLAGS) -Wpedantic
+#CPPFLAGS = $(MPI_FLAGS) $(OPENMP_FLAGS)
+#LDFLAGS = $(OPENMP_LDFLAGS) 
 
 
 ###############################################################################
-# LLNL TOSS Clang (cab)
+# OpenMP 4.5 on LLNL CORAL EA nodes
 ###############################################################################
-#CLANGPATH = /usr/global/tools/clang/chaos_5_x86_64_ib/clang-omp-3.5.0
-#OPTFLAGS = -g -O2 
-#
-#CXX=${CLANGPATH}/bin/mpiclang++
+## Choose one Cuda path
+##CUDA_PATH = /usr/local/cuda-8.0
+#CUDA_PATH = /usr/tcetmp/packages/cuda-9.0.176
+
+## Choose one of these compilers
+#CXX=mpiclang++-gpu
+#CXX=mpixlC-gpu
+
+## Uncomment next line to run on CPU only (disable GPUs)
+#OPENMP_OFFLOAD_FLAGS = -DUSE_OPENMP_NO_GPU 
+
+#OPENMP_OFFLOAD_FLAGS += -DHAVE_OPENMP_TARGET -mcpu=power8  
+#OPENMP_FLAGS = -DHAVE_OPENMP -fopenmp ${OPENMP_OFFLOAD_FLAGS}
+#OPTFLAGS = -O2
+
+#CUDA_FLAGS = -I${CUDA_PATH}/include/
+#CUDA_LDFLAGS = -L${CUDA_PATH}/lib64/ -lcuda -lcudart
+
 #CXXFLAGS = -std=c++11 $(OPTFLAGS)
-#CPPFLAGS = -DHAVE_MPI
-#LDFLAGS  = -Wl,-rpath,${CLANGPATH}/lib
-
-
-###############################################################################
-# Trinity Compilers                                                           #
-#                                                                             #
-# One must 'swap'  modules on this machine to access different compilers.     #
-###############################################################################
-
-### Defaults to Intel.
-#OPTFLAGS = -g -O2 -xmic-avx512 -ipo
-#OPENMP_FLAGS = -DHAVE_OPENMP -qopenmp -pthread -DUSE_OPENMP_NO_GPU
-#OPENMP_LDFLAGS = -qopenmp -pthread
-#
-#CXX=CC
-#CXXFLAGS = -std=c++11 $(OPTFLAGS)
-#CPPFLAGS = -DHAVE_MPI -DCHRONO_MISSING  $(OPENMP_FLAGS)
-#LDFLAGS  = $(OPENMP_LDFLAGS) 
+#CPPFLAGS = -DHAVE_MPI $(OPENMP_FLAGS) $(CUDA_FLAGS) 
+#LDFLAGS  = $(CUDA_LDFLAGS)
 
 
 
