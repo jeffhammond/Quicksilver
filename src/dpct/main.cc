@@ -22,9 +22,6 @@
 #include "CoralBenchmark.hh"
 #include "EnergySpectrum.hh"
 
-#include "git_hash.hh"
-#include "git_vers.hh"
-
 #include "QS_sycl.hh"
 
 sycl::queue q;
@@ -41,7 +38,7 @@ MonteCarlo *mcco  = NULL;
 int main(int argc, char** argv)
 {
    mpiInit(&argc, &argv);
-   printBanner(GIT_VERS, GIT_HASH);
+   //printBanner(GIT_VERS, GIT_HASH);
 
    Parameters params = getParameters(argc, argv);
    printParameters(params, cout);
