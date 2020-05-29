@@ -43,7 +43,7 @@ int main(int argc, char** argv)
    Parameters params = getParameters(argc, argv);
    printParameters(params, cout);
 
-   q = sycl::cpu_selector{};
+   q = sycl::gpu_selector{};
    if ( q.get_device().is_cpu() )         std::cout << "is cpu"         << std::endl;
    if ( q.get_device().is_gpu() )         std::cout << "is gpu"         << std::endl;
    if ( q.get_device().is_host() )        std::cout << "is host"        << std::endl;
