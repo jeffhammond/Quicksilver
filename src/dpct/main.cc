@@ -38,6 +38,9 @@ using namespace std;
 
 MonteCarlo *mcco  = NULL;
 
+#define XSTRINGIFY(s) STRINGIFY(s)
+#define STRINGIFY(s) #s
+
 int main(int argc, char** argv)
 {
    mpiInit(&argc, &argv);
@@ -46,7 +49,18 @@ int main(int argc, char** argv)
    Parameters params = getParameters(argc, argv);
    printParameters(params, cout);
 
-   q = sycl::default_selector{};
+#if QS_SYCL_DEVICE == CPU
+   sycl::device default_device = sycl::device(cl::sycl::cpu_selector{});
+#elif QS_SYCL_DEVICE == GPU
+   sycl::device default_device = sycl::device(cl::sycl::gpu_selector{});
+#elif QS_SYCL_DEVICE == HOST
+   sycl::device default_device = sycl::device(cl::sycl::host_selector{});
+#else
+#error You must specify QS_SYCL_DEVICE={CPU,GPU,HOST}!
+#endif
+   std::cout << "Using SYCL " << XSTRINGIFY( QS_SYCL_DEVICE ) << " device" << std::endl;
+
+   q = sycl::queue( default_device );
 
    // mcco stores just about everything. 
    mcco = initMC(params, q); 
