@@ -46,7 +46,12 @@ int main(int argc, char** argv)
    Parameters params = getParameters(argc, argv);
    printParameters(params, cout);
 
-   q = sycl::default_selector{};
+   q = sycl::cpu_selector{};
+   if ( q.get_device().is_cpu() )         std::cout << "is cpu"         << std::endl;
+   if ( q.get_device().is_gpu() )         std::cout << "is gpu"         << std::endl;
+   if ( q.get_device().is_host() )        std::cout << "is host"        << std::endl;
+   if ( q.get_device().is_accelerator() ) std::cout << "is accelerator" << std::endl;
+
 
    // mcco stores just about everything. 
    mcco = initMC(params, q); 
