@@ -50,19 +50,21 @@ int main(int argc, char** argv)
    printParameters(params, cout);
 
 #if QS_SYCL_DEVICE == CPU
-   sycl::device device = sycl::device(cl::sycl::cpu_selector{});
+   q = sycl::cpu_selector{};
 #elif QS_SYCL_DEVICE == GPU
-   sycl::device device = sycl::device(cl::sycl::gpu_selector{});
+   q = sycl::gpu_selector{};
 #elif QS_SYCL_DEVICE == HOST
-   sycl::device device = sycl::device(cl::sycl::host_selector{});
+   q = sycl::host_selector{};
 #elif QS_SYCL_DEVICE == DEFAULT
-   sycl::device device = sycl::device(cl::sycl::default_selector{});
+   q = sycl::default_selector{};
 #else
 #error You must specify QS_SYCL_DEVICE={CPU,GPU,HOST,DEFAULT}!
 #endif
    std::cout << "Using SYCL " << XSTRINGIFY( QS_SYCL_DEVICE ) << " device" << std::endl;
-
-   q = sycl::queue( device );
+   if ( q.get_device().is_cpu() )         std::cout << "is cpu"         << std::endl;
+   if ( q.get_device().is_gpu() )         std::cout << "is gpu"         << std::endl;
+   if ( q.get_device().is_host() )        std::cout << "is host"        << std::endl;
+   if ( q.get_device().is_accelerator() ) std::cout << "is accelerator" << std::endl;
 
    // mcco stores just about everything. 
    mcco = initMC(params, q); 
