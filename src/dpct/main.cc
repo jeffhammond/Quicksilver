@@ -50,17 +50,19 @@ int main(int argc, char** argv)
    printParameters(params, cout);
 
 #if QS_SYCL_DEVICE == CPU
-   sycl::device default_device = sycl::device(cl::sycl::cpu_selector{});
+   sycl::device device = sycl::device(cl::sycl::cpu_selector{});
 #elif QS_SYCL_DEVICE == GPU
-   sycl::device default_device = sycl::device(cl::sycl::gpu_selector{});
+   sycl::device device = sycl::device(cl::sycl::gpu_selector{});
 #elif QS_SYCL_DEVICE == HOST
-   sycl::device default_device = sycl::device(cl::sycl::host_selector{});
+   sycl::device device = sycl::device(cl::sycl::host_selector{});
+#elif QS_SYCL_DEVICE == DEFAULT
+   sycl::device device = sycl::device(cl::sycl::default_selector{});
 #else
-#error You must specify QS_SYCL_DEVICE={CPU,GPU,HOST}!
+#error You must specify QS_SYCL_DEVICE={CPU,GPU,HOST,DEFAULT}!
 #endif
    std::cout << "Using SYCL " << XSTRINGIFY( QS_SYCL_DEVICE ) << " device" << std::endl;
 
-   q = sycl::queue( default_device );
+   q = sycl::queue( device );
 
    // mcco stores just about everything. 
    mcco = initMC(params, q); 

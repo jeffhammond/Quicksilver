@@ -99,6 +99,11 @@ CXXFLAGS =
 CPPFLAGS = 
 LDFLAGS =
 
+CXX=g++
+CXXFLAGS = -std=c++11  $(OPTFLAGS) -Wpedantic
+CPPFLAGS = $(OPENMP_FLAGS)
+LDFLAGS = $(OPENMP_LDFLAGS) 
+
 ###############################################################################
 # Cuda on LLNL CORAL EA nodes
 ###############################################################################
@@ -134,11 +139,6 @@ LDFLAGS  += -lstdc++
 OPENMP_FLAGS = -DHAVE_OPENMP -fopenmp 
 OPENMP_LDFLAGS = -fopenmp
 OPTFLAGS = -g -O2
-#
-CXX=g++
-CXXFLAGS = -std=c++11  $(OPTFLAGS) -Wpedantic
-CPPFLAGS = $(OPENMP_FLAGS)
-LDFLAGS = $(OPENMP_LDFLAGS) 
 
 
 ###############################################################################
