@@ -1,6 +1,8 @@
 #ifndef MACROSCOPIC_CROSS_SECTION_HH
 #define MACROSCOPIC_CROSS_SECTION_HH
 
+#include <CL/sycl.hpp>
+
 #include "DeclareMacro.hh"
 
 class MonteCarlo;

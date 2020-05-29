@@ -1,6 +1,8 @@
 #ifndef MCT_HH
 #define MCT_HH
 
+#include <CL/sycl.hpp>
+
 #include "portability.hh"
 #include "DeclareMacro.hh"
 

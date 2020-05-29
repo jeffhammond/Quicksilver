@@ -1,6 +1,7 @@
 #ifndef MC_LOCATION_INCLUDE
 #define MC_LOCATION_INCLUDE
 
+#include <CL/sycl.hpp>
 
 // ToDo:  How much chaos would be caused by removing the default constructor?
 

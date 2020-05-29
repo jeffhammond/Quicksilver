@@ -14,7 +14,7 @@
 #include "PhysicalConstants.hh"
 #include "DeclareMacro.hh"
 
-namespace
+namespace NO
 {
    HOST_DEVICE
    MC_Nearest_Facet MCT_Nearest_Facet_3D_G(
@@ -77,7 +77,6 @@ namespace
 
 }
 
-
 ///  Calculates the nearest facet of the specified cell to the
 ///  specified coordinates.
 ///
@@ -109,7 +108,7 @@ MC_Nearest_Facet MCT_Nearest_Facet(MC_Particle *mc_particle,
     MC_Domain &domain = monteCarlo->domain[location.domain];
 
     MC_Nearest_Facet nearest_facet =
-       MCT_Nearest_Facet_3D_G(mc_particle, domain, location, coordinate, direction_cosine);
+       NO::MCT_Nearest_Facet_3D_G(mc_particle, domain, location, coordinate, direction_cosine);
 
     if (nearest_facet.distance_to_facet < 0) { nearest_facet.distance_to_facet = 0; }
 
@@ -174,12 +173,12 @@ void MCT_Generate_Coordinate_3D_G(uint64_t *random_number_seed,
         if (facet_index == num_facets) { break; }
 
         int facet_points[3];
-        MCT_Facet_Points_3D_G(domain, cell, facet_index, 3, facet_points);
+        NO::MCT_Facet_Points_3D_G(domain, cell, facet_index, 3, facet_points);
         point0 = &domain.mesh._node[facet_points[0]];
         point1 = &domain.mesh._node[facet_points[1]];
         point2 = &domain.mesh._node[facet_points[2]];
 
-        double subvolume = MCT_Cell_Volume_3D_G_vector_tetDet(*point0, *point1, *point2, center);
+        double subvolume = NO::MCT_Cell_Volume_3D_G_vector_tetDet(*point0, *point1, *point2, center);
         current_volume += subvolume;
 
     }
@@ -253,7 +252,7 @@ MC_Vector MCT_Cell_Position_3D_G(const MC_Domain &domain,
 }
 
 
-namespace
+namespace NO
 {
    ///  Fills in the facet_points array with the domain local point
    ///  numbers specified by the cell number and cell-local facet number
@@ -271,7 +270,7 @@ namespace
    }
 }
 
-namespace
+namespace NO
 {
    ///  Calculates the distance from the specified coordinates to the
    ///  input segment. This is used to track to the faces of a 3D_G
@@ -429,11 +428,11 @@ void MCT_Reflect_Particle(MonteCarlo *monteCarlo, MC_Particle &particle)
 }
 HOST_DEVICE_END
 
-namespace
+namespace NO
 {
    ///  Loop over all the facets, return the minimum distance.
    HOST_DEVICE_CUDA
-   MC_Nearest_Facet MCT_Nearest_Facet_Find_Nearest(int num_facets_per_cell,
+   MC_Nearest_Facet NO::MCT_Nearest_Facet_Find_Nearest(int num_facets_per_cell,
                                                    MC_Distance_To_Facet *distance_to_facet)
    {
       MC_Nearest_Facet nearest_facet;
@@ -480,7 +479,7 @@ namespace
 }
 
 
-namespace
+namespace NO
 {
    ///  Loop over all the facets, return the minimum distance.
    HOST_DEVICE_CUDA
@@ -539,7 +538,7 @@ namespace
 
 
 
-namespace
+namespace NO
 {
    ///  Calculates the distance from the specified coordinates to each
    ///  of the facets of the specified cell in a three-dimensional,
@@ -624,7 +623,7 @@ namespace
 
 } // anonymous namespace
 
-namespace
+namespace NO
 {
   ///  \return 6 times the volume of the tet.
   ///
@@ -649,7 +648,7 @@ namespace
 }
 
 
-namespace
+namespace NO
 {
    ///  Move the input particle by a small amount toward the center of the cell.
    HOST_DEVICE_CUDA

@@ -3,7 +3,7 @@
 
 //---------------------------------------------------------------------------//
 
-namespace
+namespace NO
 {
 HOST_DEVICE
    // Break a 64 bit state into 2 32 bit ints.
@@ -18,7 +18,7 @@ HOST_DEVICE_END
 
 //---------------------------------------------------------------------------//
 
-namespace
+namespace NO
 {
    // Function sed to hash a 64 bit int into another, unrelated one.  It
    // does this in two 32 bit chuncks. This function uses the algorithm
@@ -55,7 +55,7 @@ HOST_DEVICE_END
 
 //---------------------------------------------------------------------------//
 
-namespace
+namespace NO
 {
 
    HOST_DEVICE
@@ -80,7 +80,7 @@ namespace
 
 //---------------------------------------------------------------------------//
 
-namespace
+namespace NO
 {
 HOST_DEVICE
    // Function used to hash a 64 bit int to get an initial state.
@@ -106,7 +106,7 @@ HOST_DEVICE_END
 HOST_DEVICE
 uint64_t rngSpawn_Random_Number_Seed(uint64_t *parent_seed)
 {
-  uint64_t spawned_seed = hash_state(*parent_seed);
+  uint64_t spawned_seed = NO::hash_state(*parent_seed);
   // Bump the parent seed as that is what is expected from the interface.
   rngSample(parent_seed);
   return spawned_seed;

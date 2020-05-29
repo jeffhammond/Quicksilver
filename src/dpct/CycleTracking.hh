@@ -1,4 +1,7 @@
 #include <cinttypes>
+
+#include <CL/sycl.hpp>
+
 #include "DeclareMacro.hh"
 
 // Forward Declaration

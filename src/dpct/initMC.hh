@@ -18,9 +18,11 @@ using std::endl;
 using std::map;
 using std::make_pair;
 
+#include <CL/sycl.hpp>
+
 class Parameters;
 class MonteCarlo;
 
-MonteCarlo* initMC(const Parameters& params);
+MonteCarlo* initMC(const Parameters& params, sycl::queue & q);
 
 #endif

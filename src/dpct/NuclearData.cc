@@ -82,7 +82,7 @@ void NuclearDataReaction::sampleCollision(
       }
       break;
      case Undefined:
-      printf("_reactionType invalid\n");
+      //printf("_reactionType invalid\n");
       qs_assert(false);
    }
 }

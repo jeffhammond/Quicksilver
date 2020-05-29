@@ -4,7 +4,7 @@ CXX       = dpcpp
 CXXFLAGS  = -std=c++14
 CXXFLAGS += -O3
 CXXFLAGS += -ferror-limit=1
-CPPFLAGS += -DHAVE_SYCL
+CPPFLAGS += -DHAVE_SYCL -DHAVE_CUDA
 LDFLAGS   =
 
 EXT = .cc

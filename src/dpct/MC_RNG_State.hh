@@ -1,6 +1,8 @@
 #ifndef MC_RNG_STATE_INCLUDE
 #define MC_RNG_STATE_INCLUDE
 
+#include <CL/sycl.hpp>
+
 #include "portability.hh"
 #include "DeclareMacro.hh"
 

@@ -19,8 +19,7 @@
 
 
 HOST_DEVICE
-static inline unsigned int MC_Find_Min(const double *array,
-                                       int     num_elements);
+inline unsigned int MC_Find_Min(const double *array, int     num_elements);
 HOST_DEVICE_END
 
 //--------------------------------------------------------------------------------------------------
@@ -50,8 +49,8 @@ MC_Segment_Outcome_type::Enum MC_Segment_Outcome(MonteCarlo* monteCarlo, MC_Part
         if ( mc_particle.num_mean_free_paths > -900.0 )
         {
 #if 1
-            printf(" MC_Segment_Outcome: mc_particle.num_mean_free_paths > -900.0 \n");
- #else
+            //printf(" MC_Segment_Outcome: mc_particle.num_mean_free_paths > -900.0 \n");
+#else
             std::string output_string;
             MC_Warning( "Forced Collision: num_mean_free_paths < 0 \n"
                              "Particle record:\n%s", output_string.c_str());
@@ -232,8 +231,7 @@ HOST_DEVICE_END
 
 
 HOST_DEVICE
-static inline unsigned int MC_Find_Min(const double *array,
-                                       int     num_elements)
+inline unsigned int MC_Find_Min(const double *array, int     num_elements)
 {
     double min = array[0];
     int    min_index = 0;

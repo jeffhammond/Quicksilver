@@ -148,9 +148,13 @@ inline void MC_Particle::Move_Particle( const DirectionCosine &my_direction_cosi
 //----------------------------------------------------------------------------------------------------------------------
 //  Print all of the particles components
 //----------------------------------------------------------------------------------------------------------------------
+
+using sycl::intel::experimental::printf;
+
 HOST_DEVICE_CUDA
 inline void MC_Particle::PrintParticle()
 {
+#if 0
     printf( "coordiante:          %g\t%g\t%g\n", coordinate.x, coordinate.y, coordinate.z );
     printf( "velocity:            %g\t%g\t%g\n", velocity.x, velocity.y, velocity.z );
     printf( "direction_cosine:    %g\t%g\t%g\n", direction_cosine.alpha, direction_cosine.beta, direction_cosine.gamma );
@@ -176,6 +180,7 @@ inline void MC_Particle::PrintParticle()
     printf( "facet:               %d\n", facet);
     printf( "normal_dot:          %g\n", normal_dot);
     printf("\n");
+#endif
 }
 
 

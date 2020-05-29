@@ -25,6 +25,10 @@
 #include "git_hash.hh"
 #include "git_vers.hh"
 
+#include "QS_sycl.hh"
+
+sycl::queue q;
+
 void gameOver();
 void cycleInit( bool loadBalance );
 void cycleTracking(MonteCarlo* monteCarlo);
@@ -42,8 +46,10 @@ int main(int argc, char** argv)
    Parameters params = getParameters(argc, argv);
    printParameters(params, cout);
 
+   q = sycl::default_selector{};
+
    // mcco stores just about everything. 
-   mcco = initMC(params); 
+   mcco = initMC(params, q); 
 
    int loadBalance = params.simulationParams.loadBalance;
 
@@ -73,7 +79,7 @@ int main(int argc, char** argv)
 
 #ifdef HAVE_UVM
     mcco->~MonteCarlo();
-   sycl::free(mcco, dpct::get_default_context());
+   sycl::free(mcco, q);
 #else
    delete mcco;
 #endif
@@ -183,38 +189,28 @@ void cycleTracking(MonteCarlo *monteCarlo)
                     {
                       case gpuWithCUDA:
                        {
-                          #if defined (HAVE_CUDA)
-                  sycl::range<3> grid(1, 1, 1);
-                  sycl::range<3> block(1, 1, 1);
+#if defined (HAVE_CUDA)
+                          sycl::range<3> grid(1, 1, 1);
+                          sycl::range<3> block(1, 1, 1);
                           int runKernel = ThreadBlockLayout( grid, block, numParticles);
-                          
+                          //
                           //Call Cycle Tracking Kernel
-                          if( runKernel )
-                     dpct::get_default_queue().submit([&](sycl::handler &cgh) {
-                        auto dpct_global_range = grid * block;
+                          if ( runKernel )
+                              q.submit([&](sycl::handler &cgh) {
+                                  auto dpct_global_range = grid * block;
 
-                        cgh.parallel_for(
-                            sycl::nd_range<3>(
-                                sycl::range<3>(dpct_global_range.get(2),
-                                               dpct_global_range.get(1),
-                                               dpct_global_range.get(0)),
-                                sycl::range<3>(block.get(2), block.get(1),
-                                               block.get(0))),
-                            [=](sycl::nd_item<3> item_ct1) {
-                               CycleTrackingKernel(monteCarlo, numParticles,
-                                                   processingVault,
-                                                   processedVault, item_ct1);
-                            });
-                     });
-
-                          //Synchronize the stream so that memory is copied back before we begin MPI section
-                  /*
-                  DPCT1010:0: SYCL uses exceptions to report errors and does not
-                  use the error codes. The call was replaced with 0. You need to
-                  rewrite this code.
-                  */
-                  0;
-                  dpct::get_current_device().queues_wait_and_throw();
+                                  cgh.parallel_for(
+                                      sycl::nd_range<3>(
+                                          sycl::range<3>(dpct_global_range.get(2),
+                                                         dpct_global_range.get(1),
+                                                         dpct_global_range.get(0)),
+                                          sycl::range<3>(block.get(2), block.get(1),
+                                                         block.get(0))),
+                                      [=](sycl::nd_item<3> item_ct1) {
+                                             CycleTrackingKernel(monteCarlo, numParticles, processingVault, processedVault, item_ct1);
+                                  });
+                              });
+                              q.wait();
 #endif
                        }
                        break;

@@ -36,15 +36,12 @@ namespace
 
 }
 
-MonteCarlo* initMC(const Parameters& params)
+MonteCarlo* initMC(const Parameters& params, sycl::queue & q)
 {
    MonteCarlo* monteCarlo;
    #ifdef HAVE_UVM
-      void* ptr;
-   ptr = (void *)sycl::malloc_shared(sizeof(MonteCarlo),
-                                     dpct::get_current_device(),
-                                     dpct::get_default_context());
-      monteCarlo = new(ptr) MonteCarlo(params);
+     void * ptr = (void *)sycl::malloc_shared(sizeof(MonteCarlo), q);
+     monteCarlo = new(ptr) MonteCarlo(params);
    #else
      monteCarlo = new MonteCarlo(params);
    #endif
@@ -69,8 +66,7 @@ namespace
       #if defined(HAVE_OPENMP_TARGET)
          int Ngpus = omp_get_num_devices();
       #elif defined(HAVE_CUDA)
-         int Ngpus;
-   Ngpus = dpct::dev_mgr::instance().device_count();
+         int Ngpus = 1;
       #else
          int Ngpus = 0;
       #endif
@@ -81,13 +77,9 @@ namespace
             monteCarlo->processor_info->use_gpu = 1;
             int GPUID = monteCarlo->processor_info->rank%Ngpus;
             monteCarlo->processor_info->gpu_id = GPUID;
-            
             #if defined(HAVE_OPENMP_TARGET)
                 omp_set_default_device(GPUID);
             #endif
-
-      dpct::dev_mgr::instance().select_device(GPUID);
-            //cudaDeviceSetLimit( cudaLimitStackSize, 64*1024 );
             #endif
          }
          else
@@ -121,21 +113,12 @@ namespace
    {
       #if defined HAVE_UVM
          void *ptr1, *ptr2;
-   ptr1 = (void *)sycl::malloc_shared(sizeof(NuclearData),
-                                      dpct::get_current_device(),
-                                      dpct::get_default_context());
-   ptr2 = (void *)sycl::malloc_shared(sizeof(MaterialDatabase),
-                                      dpct::get_current_device(),
-                                      dpct::get_default_context());
-
-         monteCarlo->_nuclearData = new(ptr1) NuclearData(params.simulationParams.nGroups,
-                                                          params.simulationParams.eMin,
-                                                          params.simulationParams.eMax);
+         ptr1 = (void *)sycl::malloc_shared(sizeof(NuclearData), q);
+         ptr2 = (void *)sycl::malloc_shared(sizeof(MaterialDatabase), q);
+         monteCarlo->_nuclearData = new(ptr1) NuclearData(params.simulationParams.nGroups, params.simulationParams.eMin, params.simulationParams.eMax);
          monteCarlo->_materialDatabase = new(ptr2) MaterialDatabase();
      #else
-         monteCarlo->_nuclearData = new NuclearData(params.simulationParams.nGroups,
-                                                    params.simulationParams.eMin,
-                                                    params.simulationParams.eMax);
+         monteCarlo->_nuclearData = new NuclearData(params.simulationParams.nGroups, params.simulationParams.eMin, params.simulationParams.eMax);
          monteCarlo->_materialDatabase = new MaterialDatabase();
      #endif
 
