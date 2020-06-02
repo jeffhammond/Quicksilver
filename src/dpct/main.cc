@@ -26,6 +26,9 @@
 
 sycl::queue q;
 
+#define XSTRINGIFY(s) STRINGIFY(s)
+#define STRINGIFY(s) #s
+
 void gameOver();
 void cycleInit( bool loadBalance );
 void cycleTracking(MonteCarlo* monteCarlo);
@@ -43,12 +46,21 @@ int main(int argc, char** argv)
    Parameters params = getParameters(argc, argv);
    printParameters(params, cout);
 
-   q = sycl::gpu_selector{};
+#if QS_SYCL_DEVICE == CPU
+   q = cl::sycl::cpu_selector{};
+#elif QS_SYCL_DEVICE == GPU
+   q = cl::sycl::gpu_selector{};
+#elif QS_SYCL_DEVICE == HOST
+   q = cl::sycl::host_selector{};
+#else
+#error You must specify QS_SYCL_DEVICE={CPU,GPU,HOST}!
+#endif
+   std::cout << "Using SYCL " << XSTRINGIFY( QS_SYCL_DEVICE ) << " device" << std::endl;
+
    if ( q.get_device().is_cpu() )         std::cout << "is cpu"         << std::endl;
    if ( q.get_device().is_gpu() )         std::cout << "is gpu"         << std::endl;
    if ( q.get_device().is_host() )        std::cout << "is host"        << std::endl;
    if ( q.get_device().is_accelerator() ) std::cout << "is accelerator" << std::endl;
-
 
    // mcco stores just about everything. 
    mcco = initMC(params, q); 
