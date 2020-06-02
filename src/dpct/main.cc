@@ -26,9 +26,6 @@
 
 sycl::queue q;
 
-#define XSTRINGIFY(s) STRINGIFY(s)
-#define STRINGIFY(s) #s
-
 void gameOver();
 void cycleInit( bool loadBalance );
 void cycleTracking(MonteCarlo* monteCarlo);
@@ -46,16 +43,24 @@ int main(int argc, char** argv)
    Parameters params = getParameters(argc, argv);
    printParameters(params, cout);
 
-#if QS_SYCL_DEVICE == CPU
-   q = cl::sycl::cpu_selector{};
-#elif QS_SYCL_DEVICE == GPU
-   q = cl::sycl::gpu_selector{};
-#elif QS_SYCL_DEVICE == HOST
-   q = cl::sycl::host_selector{};
-#else
-#error You must specify QS_SYCL_DEVICE={CPU,GPU,HOST}!
-#endif
-   std::cout << "Using SYCL " << XSTRINGIFY( QS_SYCL_DEVICE ) << " device" << std::endl;
+   char * devchar = std::getenv("QS_DEVICE");
+   std::string devname = (devchar==NULL ? "None" : devchar);
+   if (devname == "CPU") {
+       q = cl::sycl::cpu_selector{};
+   }
+   else
+   if (devname == "GPU") {
+       q = cl::sycl::gpu_selector{};
+   }
+   else
+   if (devname == "HOST") {
+       q = cl::sycl::host_selector{};
+   }
+   else
+   {
+       std::cout << "QS_DEVICE must be CPU, GPU or HOST" << std::endl;
+       std::abort();
+   }
 
    if ( q.get_device().is_cpu() )         std::cout << "is cpu"         << std::endl;
    if ( q.get_device().is_gpu() )         std::cout << "is gpu"         << std::endl;
