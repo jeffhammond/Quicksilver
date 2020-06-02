@@ -43,8 +43,8 @@ int main(int argc, char** argv)
    Parameters params = getParameters(argc, argv);
    printParameters(params, cout);
 
-   // mcco stores just about everything. 
-   mcco = initMC(params); 
+   // mcco stores just about everything.
+   mcco = initMC(params);
 
    int loadBalance = params.simulationParams.loadBalance;
 
@@ -80,7 +80,7 @@ int main(int argc, char** argv)
 #endif
 
    mpiFinalize();
-   
+
    return 0;
 }
 
@@ -112,7 +112,7 @@ void cycleInit( bool loadBalance )
     mcco->particle_buffer->Initialize();
 
     MC_SourceNow(mcco);
-   
+
     PopulationControl(mcco, loadBalance); // controls particle population
 
     RouletteLowWeightParticles(mcco); // Delete particles with low statistical weight
@@ -125,7 +125,7 @@ void cycleInit( bool loadBalance )
 
 __global__ void CycleTrackingKernel( MonteCarlo* monteCarlo, int num_particles, ParticleVault* processingVault, ParticleVault* processedVault )
 {
-   int global_index = getGlobalThreadID(); 
+   int global_index = getGlobalThreadID();
 
     if( global_index < num_particles )
     {
@@ -167,9 +167,9 @@ void cycleTracking(MonteCarlo *monteCarlo)
 
                 ParticleVault *processingVault = my_particle_vault.getTaskProcessingVault(processing_vault);
                 ParticleVault *processedVault =  my_particle_vault.getTaskProcessedVault(processed_vault);
-            
+
                 int numParticles = processingVault->size();
-            
+
                 if ( numParticles != 0 )
                 {
                     NVTX_Range trackingKernel("cycleTracking_TrackingKernel"); // range ends at end of scope
@@ -187,28 +187,28 @@ void cycleTracking(MonteCarlo *monteCarlo)
                           dim3 grid(1,1,1);
                           dim3 block(1,1,1);
                           int runKernel = ThreadBlockLayout( grid, block, numParticles);
-                          
+
                           //Call Cycle Tracking Kernel
                           if( runKernel )
                              CycleTrackingKernel<<<grid, block >>>( monteCarlo, numParticles, processingVault, processedVault );
-                          
+
                           //Synchronize the stream so that memory is copied back before we begin MPI section
                           cudaPeekAtLastError();
                           cudaDeviceSynchronize();
                           #endif
                        }
                        break;
-                       
+
                       case gpuWithOpenMP:
                        {
                           int nthreads=128;
-                          if (numParticles <  64*56 ) 
+                          if (numParticles <  64*56 )
                              nthreads = 64;
                           int nteams = (numParticles + nthreads - 1 ) / nthreads;
                           nteams = nteams > 1 ? nteams : 1;
                           #ifdef HAVE_OPENMP_TARGET
-                          #pragma omp target enter data map(to:monteCarlo[0:1]) 
-                          #pragma omp target enter data map(to:processingVault[0:1]) 
+                          #pragma omp target enter data map(to:monteCarlo[0:1])
+                          #pragma omp target enter data map(to:processingVault[0:1])
                           #pragma omp target enter data map(to:processedVault[0:1])
                           #pragma omp target teams distribute parallel for num_teams(nteams) thread_limit(128)
                           #endif
@@ -245,7 +245,7 @@ void cycleTracking(MonteCarlo *monteCarlo)
                 // Next, communicate particles that have crossed onto
                 // other MPI ranks.
                 NVTX_Range cleanAndComm("cycleTracking_clean_and_comm");
-                
+
                 SendQueue &sendQueue = *(my_particle_vault.getSendQueue());
                 monteCarlo->particle_buffer->Allocate_Send_Buffer( sendQueue );
 
@@ -314,7 +314,7 @@ void cycleFinalize()
     mcco->_tallies->_balanceTask[0]._end = mcco->_particleVaultContainer->sizeProcessed();
 
     // Update the cumulative tally data.
-    mcco->_tallies->CycleFinalize(mcco); 
+    mcco->_tallies->CycleFinalize(mcco);
 
     mcco->time_info->cycle++;
 
