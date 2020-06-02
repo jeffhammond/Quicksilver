@@ -216,13 +216,13 @@ void cycleTracking(MonteCarlo *monteCarlo)
                           //Call Cycle Tracking Kernel
                           if ( runKernel )
                               q.submit([&](sycl::handler &cgh) {
-                                  auto dpct_global_range = grid * block;
+                                  auto global_range = grid * block;
 
                                   cgh.parallel_for(
                                       sycl::nd_range<3>(
-                                          sycl::range<3>(dpct_global_range.get(2),
-                                                         dpct_global_range.get(1),
-                                                         dpct_global_range.get(0)),
+                                          sycl::range<3>(global_range.get(2),
+                                                         global_range.get(1),
+                                                         global_range.get(0)),
                                           sycl::range<3>(block.get(2), block.get(1),
                                                          block.get(0))),
                                       [=](sycl::nd_item<3> item_ct1) {
