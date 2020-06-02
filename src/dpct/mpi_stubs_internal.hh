@@ -66,7 +66,7 @@ typedef struct _Handleitem
   int handle;
   struct _Handleitem *next;
 
-   union dpct_type_d8b7ed
+   union type_d8b7ed
   {
     void *anything;           // At least size of void *
     Comm comm;
