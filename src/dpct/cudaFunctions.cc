@@ -1,8 +1,9 @@
 #include <CL/sycl.hpp>
-#include <dpct/dpct.hpp>
 
 #include "cudaFunctions.hh"
 #include "cudaUtils.hh"
+
+#include "QS_sycl.hh"
 
 namespace
 {
@@ -21,12 +22,12 @@ namespace
 #if defined (HAVE_CUDA)
 void warmup_kernel()
 {
-   dpct::get_default_queue().submit([&](sycl::handler &cgh) {
+   q.submit([&](sycl::handler &cgh) {
       cgh.parallel_for(
           sycl::nd_range<3>(sycl::range<3>(1, 1, 1), sycl::range<3>(1, 1, 1)),
           [=](sycl::nd_item<3> item_ct1) { WarmUpKernel(item_ct1); });
    });
-   dpct::get_current_device().queues_wait_and_throw();
+   q.wait();
 }
 #endif
 
