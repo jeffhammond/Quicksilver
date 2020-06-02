@@ -92,7 +92,7 @@ namespace
          monteCarlo->processor_info->gpu_id = -1;
 #endif
 
-#ifdef HAVE_CUDA
+#if defined(HAVE_CUDA) && !defined(HAVE_SYCL)
     if( monteCarlo->processor_info->use_gpu )
         warmup_kernel();
 #endif
