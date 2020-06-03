@@ -96,13 +96,13 @@ class NuclearData
                   double totalCrossSection,
                   double fissionWeight, double scatterWeight, double absorptionWeight);
 
-   HOST_DEVICE_CUDA
+   HOST_DEVICE_CUDA SYCL_EXTERNAL
    int getEnergyGroup(double energy);
    HOST_DEVICE_CUDA SYCL_EXTERNAL
    int getNumberReactions(unsigned int isotopeIndex);
-   HOST_DEVICE_CUDA
+   HOST_DEVICE_CUDA SYCL_EXTERNAL
    double getTotalCrossSection(unsigned int isotopeIndex, unsigned int group);
-   HOST_DEVICE_CUDA
+   HOST_DEVICE_CUDA SYCL_EXTERNAL
    double getReactionCrossSection(unsigned int reactIndex, unsigned int isotopeIndex, unsigned int group);
 
    int _numEnergyGroups;
