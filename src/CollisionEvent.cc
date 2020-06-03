@@ -11,6 +11,7 @@
 #include "PhysicalConstants.hh"
 #include "DeclareMacro.hh"
 #include "AtomicMacro.hh"
+#include "mathHelp.hh"
 
 #define MAX_PRODUCTION_SIZE 4
 
@@ -21,13 +22,6 @@
 //  Return true if the particle will continue.
 //----------------------------------------------------------------------------------------------------------------------
 
-#ifdef HAVE_SYCL
-using sycl::sin;
-using sycl::cos;
-using sycl::sqrt;
-using sycl::log;
-#endif
-
 HOST_DEVICE SYCL_EXTERNAL
 void updateTrajectory( double energy, double angle, MC_Particle& particle )
 {
@@ -35,12 +29,12 @@ void updateTrajectory( double energy, double angle, MC_Particle& particle )
     double cosTheta = angle;
     double randomNumber = rngSample(&particle.random_number_seed);
     double phi = 2 * 3.14159265 * randomNumber;
-    double sinPhi = sin(phi);
-    double cosPhi = cos(phi);
-    double sinTheta = sqrt((1.0 - (cosTheta*cosTheta)));
+    double sinPhi = SIN(phi);
+    double cosPhi = COS(phi);
+    double sinTheta = SQRT((1.0 - (cosTheta*cosTheta)));
     particle.direction_cosine.Rotate3DVector(sinTheta, cosTheta, sinPhi, cosPhi);
     double speed = (PhysicalConstants::_speedOfLight *
-            sqrt((1.0 - ((PhysicalConstants::_neutronRestMassEnergy *
+            SQRT((1.0 - ((PhysicalConstants::_neutronRestMassEnergy *
             PhysicalConstants::_neutronRestMassEnergy) /
             ((energy + PhysicalConstants::_neutronRestMassEnergy) *
             (energy + PhysicalConstants::_neutronRestMassEnergy))))));
@@ -48,7 +42,7 @@ void updateTrajectory( double energy, double angle, MC_Particle& particle )
     particle.velocity.y = speed * particle.direction_cosine.beta;
     particle.velocity.z = speed * particle.direction_cosine.gamma;
     randomNumber = rngSample(&particle.random_number_seed);
-    particle.num_mean_free_paths = -1.0*log(randomNumber);
+    particle.num_mean_free_paths = -1.0*LOG(randomNumber);
 }
 HOST_DEVICE_END
 

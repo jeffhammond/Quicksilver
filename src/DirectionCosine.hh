@@ -1,17 +1,9 @@
 #ifndef DIRECTION_COSINE_INCLUDE
 #define DIRECTION_COSINE_INCLUDE
 
-#include <cmath>
 #include "portability.hh"
 #include "DeclareMacro.hh"
-
-#ifdef HAVE_SYCL
-#include <CL/sycl.hpp>
-using sycl::sin;
-using sycl::cos;
-using sycl::sqrt;
-using sycl::log;
-#endif
+#include "mathHelp.hh"
 
 HOST_DEVICE_CLASS
 class DirectionCosine
@@ -132,7 +124,7 @@ inline void DirectionCosine::Rotate3DVector(double sin_Theta, double cos_Theta, 
 {
     // Calculate additional variables in the rotation matrix.
     double cos_theta = this->gamma;
-    double sin_theta = sqrt((1.0 - (cos_theta*cos_theta)));
+    double sin_theta = SQRT((1.0 - (cos_theta*cos_theta)));
 
     double cos_phi;
     double sin_phi;

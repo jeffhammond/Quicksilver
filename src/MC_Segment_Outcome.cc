@@ -13,7 +13,7 @@
 #include "MCT.hh"
 #include "PhysicalConstants.hh"
 #include "DeclareMacro.hh"
-
+#include "mathHelp.hh"
 
 HOST_DEVICE
 static inline unsigned int MC_Find_Min(const double *array,
@@ -82,7 +82,7 @@ MC_Segment_Outcome_type::Enum MC_Segment_Outcome(MonteCarlo* monteCarlo, MC_Part
         // the next collision from an exponential distribution.
         double random_number = rngSample(&mc_particle.random_number_seed);
 
-        mc_particle.num_mean_free_paths = -1.0*log(random_number);
+        mc_particle.num_mean_free_paths = -1.0*LOG(random_number);
     }
 
     // Calculate the distances to collision, nearest facet, and census.
