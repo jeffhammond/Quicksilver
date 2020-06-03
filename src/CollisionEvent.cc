@@ -21,7 +21,7 @@
 //  Return true if the particle will continue.
 //----------------------------------------------------------------------------------------------------------------------
 
-HOST_DEVICE
+HOST_DEVICE SYCL_EXTERNAL
 void updateTrajectory( double energy, double angle, MC_Particle& particle )
 {
     particle.kinetic_energy = energy;
@@ -45,8 +45,7 @@ void updateTrajectory( double energy, double angle, MC_Particle& particle )
 }
 HOST_DEVICE_END
 
-HOST_DEVICE
-
+HOST_DEVICE SYCL_EXTERNAL
 bool CollisionEvent(MonteCarlo* monteCarlo, MC_Particle &mc_particle, unsigned int tally_index)
 {
    const MC_Cell_State &cell = monteCarlo->domain[mc_particle.domain].cell_state[mc_particle.cell];
@@ -116,7 +115,9 @@ bool CollisionEvent(MonteCarlo* monteCarlo, MC_Particle &mc_particle, unsigned i
          ATOMIC_ADD( monteCarlo->_tallies->_balanceTask[tally_index]._produce, nOut);
          break;
       case NuclearDataReaction::Undefined:
+#ifndef HAVE_SYCL
          printf("reactionType invalid\n");
+#endif
          qs_assert(false);
    }
 

@@ -181,6 +181,15 @@ LDFLAGS = $(OPENMP_LDFLAGS)
 #LDFLAGS  = $(CUDA_LDFLAGS)
 
 
+###############################################################################
+# SYCL/DPC++
+###############################################################################
+CXX       = dpcpp
+CXXFLAGS  = -std=c++14
+CXXFLAGS += -g -O2
+CXXFLAGS += -ferror-limit=1
+CPPFLAGS  = -DHAVE_SYCL
+LDFLAGS   =
 
 ################################################################################
 ### Below here, it is pitch black.                                           ###

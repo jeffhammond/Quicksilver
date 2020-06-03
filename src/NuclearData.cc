@@ -82,7 +82,9 @@ void NuclearDataReaction::sampleCollision(
       }
       break;
      case Undefined:
+#ifndef HAVE_SYCL
       printf("_reactionType invalid\n");
+#endif
       qs_assert(false);
    }
 }
@@ -195,7 +197,7 @@ double NuclearDataReaction::getCrossSection(unsigned int group)
 }
 HOST_DEVICE_END
 
-HOST_DEVICE
+HOST_DEVICE SYCL_EXTERNAL
 int NuclearData::getNumberReactions(unsigned int isotopeIndex)
 {
    qs_assert(isotopeIndex < _isotopes.size());

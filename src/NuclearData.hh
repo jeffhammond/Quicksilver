@@ -45,9 +45,9 @@ class NuclearDataReaction
                        const Polynomial& polynomial, double reationCrossSection);
    
 
-   HOST_DEVICE_CUDA
+   HOST_DEVICE_CUDA SYCL_EXTERNAL
    double getCrossSection(unsigned int group);
-   HOST_DEVICE_CUDA
+   HOST_DEVICE_CUDA SYCL_EXTERNAL
    void sampleCollision(double incidentEnergy, double material_mass, double* energyOut,
                         double* angleOut, int &nOut, uint64_t* seed, int max_production_size);
    
@@ -98,7 +98,7 @@ class NuclearData
 
    HOST_DEVICE_CUDA
    int getEnergyGroup(double energy);
-   HOST_DEVICE_CUDA
+   HOST_DEVICE_CUDA SYCL_EXTERNAL
    int getNumberReactions(unsigned int isotopeIndex);
    HOST_DEVICE_CUDA
    double getTotalCrossSection(unsigned int isotopeIndex, unsigned int group);

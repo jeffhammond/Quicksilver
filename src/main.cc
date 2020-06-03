@@ -26,6 +26,10 @@
 #include "git_hash.hh"
 #include "git_vers.hh"
 
+#ifdef HAVE_SYCL
+sycl::queue q;
+#endif
+
 void gameOver();
 void cycleInit( bool loadBalance );
 void cycleTracking(MonteCarlo* monteCarlo);
@@ -42,6 +46,32 @@ int main(int argc, char** argv)
 
    Parameters params = getParameters(argc, argv);
    printParameters(params, cout);
+
+#ifdef HAVE_SYCL
+   char * devchar = std::getenv("QS_DEVICE");
+   std::string devname = (devchar==NULL ? "None" : devchar);
+   if (devname == "CPU") {
+       q = cl::sycl::cpu_selector{};
+   }
+   else
+   if (devname == "GPU") {
+       q = cl::sycl::gpu_selector{};
+   }
+   else
+   if (devname == "HOST") {
+       q = cl::sycl::host_selector{};
+   }
+   else
+   {
+       std::cout << "QS_DEVICE must be CPU, GPU or HOST" << std::endl;
+       std::abort();
+   }
+
+   if ( q.get_device().is_cpu() )         std::cout << "is cpu"         << std::endl;
+   if ( q.get_device().is_gpu() )         std::cout << "is gpu"         << std::endl;
+   if ( q.get_device().is_host() )        std::cout << "is host"        << std::endl;
+   if ( q.get_device().is_accelerator() ) std::cout << "is accelerator" << std::endl;
+#endif
 
    // mcco stores just about everything.
    mcco = initMC(params);
@@ -221,6 +251,21 @@ void cycleTracking(MonteCarlo *monteCarlo)
                           #pragma omp target exit data map(from:processingVault[0:1])
                           #pragma omp target exit data map(from:processedVault[0:1])
                           #endif
+                       }
+                       break;
+
+                      case SYCL:
+                       {
+                          const size_t N = numParticles;
+                      #ifdef HAVE_SYCL
+                          q.submit([&](sycl::handler &h) {
+                              h.parallel_for(sycl::range<1>{N},  [=](sycl::item<1> it) {
+                                 int particle_index = it[0];
+                                 CycleTrackingGuts( monteCarlo, particle_index, processingVault, processedVault );
+                              });
+                          });
+                          q.wait();
+                      #endif
                        }
                        break;
 

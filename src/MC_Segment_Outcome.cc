@@ -27,7 +27,7 @@ HOST_DEVICE_END
 //  (iii) census at the end of the time step.
 //--------------------------------------------------------------------------------------------------
 
-HOST_DEVICE 
+HOST_DEVICE SYCL_EXTERNAL
 MC_Segment_Outcome_type::Enum MC_Segment_Outcome(MonteCarlo* monteCarlo, MC_Particle &mc_particle, unsigned int &flux_tally_index)
 {
     // initialize distances to large number
@@ -46,12 +46,14 @@ MC_Segment_Outcome_type::Enum MC_Segment_Outcome(MonteCarlo* monteCarlo, MC_Part
 
         if ( mc_particle.num_mean_free_paths > -900.0 )
         {
-#if 1
-            printf(" MC_Segment_Outcome: mc_particle.num_mean_free_paths > -900.0 \n");
- #else
+#if defined(HAVE_SYCL)
+            // FIXME
+#elif 0
             std::string output_string;
             MC_Warning( "Forced Collision: num_mean_free_paths < 0 \n"
                              "Particle record:\n%s", output_string.c_str());
+#else
+            printf(" MC_Segment_Outcome: mc_particle.num_mean_free_paths > -900.0 \n");
 #endif
         }
 
