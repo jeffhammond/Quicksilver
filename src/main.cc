@@ -178,8 +178,12 @@ void cycleTracking(MonteCarlo *monteCarlo)
     //Determine whether or not to use GPUs if they are available (set for each MPI rank)
     ExecutionPolicy execPolicy = getExecutionPolicy( monteCarlo->processor_info->use_gpu );
 #ifdef HAVE_SYCL
-    if (monteCarlo->processor_info->use_gpu) printf("Using GPU\n");
-    else                                     printf("Bad\n"); std::abort();
+    if (monteCarlo->processor_info->use_gpu) {
+        printf("Using GPU\n");
+    } else {
+        printf("Bad\n");
+        std::abort();
+    }
 #endif
 
     ParticleVaultContainer &my_particle_vault = *(monteCarlo->_particleVaultContainer);
