@@ -15,6 +15,7 @@ namespace
         if( global_index == 0)
         {
         }
+        item_ct1.barrier();
     }
 #endif
 }
