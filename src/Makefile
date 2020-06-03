@@ -188,9 +188,13 @@ CXX       = dpcpp
 CXXFLAGS  = -std=c++14
 CXXFLAGS += -g -O2
 CXXFLAGS += -ferror-limit=1
-CXXFLAGS += -fsycl-targets=spir64_gen-unknown-linux-sycldevice
 CPPFLAGS  = -DHAVE_SYCL
-LDFLAGS   = -Xsycl-target-backend=spir64_gen-unknown-linux-sycldevice "-device skl"
+LDFLAGS   =
+
+# GPU offline compile
+# https://software.intel.com/content/www/us/en/develop/documentation/oneapi-programming-guide/top/programming-interface/gpu-flow/offline-compilation-for-gpu.html
+#CXXFLAGS += -fsycl-targets=spir64_gen-unknown-linux-sycldevice
+#LDFLAGS  += -Xsycl-target-backend=spir64_gen-unknown-linux-sycldevice "-device skl"
 
 ################################################################################
 ### Below here, it is pitch black.                                           ###
