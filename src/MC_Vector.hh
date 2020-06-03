@@ -3,6 +3,7 @@
 
 #include <cmath>
 #include "DeclareMacro.hh"
+#include "mathHelp.hh"
 
 HOST_DEVICE_CLASS
 class MC_Vector
@@ -90,7 +91,7 @@ class MC_Vector
    }
 
    HOST_DEVICE_CUDA
-   inline double Length() const { return std::sqrt(x*x + y*y + z*z); }
+   inline double Length() const { return SQRT(x*x + y*y + z*z); }
 
    // Distance from this vector to another point.
    HOST_DEVICE_CUDA
