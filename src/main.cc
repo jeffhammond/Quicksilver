@@ -48,6 +48,7 @@ int main(int argc, char** argv)
    printParameters(params, cout);
 
 #ifdef HAVE_SYCL
+   // HOIST INTO SETUP FUNCTION EVENTUALLY
    char * devchar = std::getenv("QS_DEVICE");
    std::string devname = (devchar==NULL ? "None" : devchar);
    if (devname == "CPU") {
@@ -67,6 +68,7 @@ int main(int argc, char** argv)
        std::abort();
    }
 
+   // DEBUG - REMOVE LATER
    if ( q.get_device().is_cpu() )         std::cout << "is cpu"         << std::endl;
    if ( q.get_device().is_gpu() )         std::cout << "is gpu"         << std::endl;
    if ( q.get_device().is_host() )        std::cout << "is host"        << std::endl;
@@ -76,9 +78,9 @@ int main(int argc, char** argv)
    // mcco stores just about everything.
    mcco = initMC(params);
 
-#ifdef HAVE_SYCL
+#ifdef HAVE_SYCL // DEBUG - REMOVE LATER
     if (mcco->processor_info->use_gpu) {
-        printf("Using GPU\n");
+        printf("Using SYCL device\n");
     } else {
         printf("Bad\n");
         std::abort();
