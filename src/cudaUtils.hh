@@ -9,6 +9,7 @@
 
 #if defined(HAVE_SYCL)
 #include <CL/sycl.hpp>
+extern sycl::queue q; // global variable for device queue
 #else
 #define SYCL_EXTERNAL
 #endif
@@ -21,6 +22,9 @@
         #define HAVE_UVM
     #endif
 #elif HAVE_CUDA
+    #define VAR_MEM MemoryControl::AllocationPolicy::UVM_MEM
+    #define HAVE_UVM
+#elif HAVE_SYCL
     #define VAR_MEM MemoryControl::AllocationPolicy::UVM_MEM
     #define HAVE_UVM
 #else

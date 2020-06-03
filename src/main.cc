@@ -104,7 +104,11 @@ int main(int argc, char** argv)
 
 #ifdef HAVE_UVM
     mcco->~MonteCarlo();
+#ifdef HAVE_SYCL
+   sycl::free(mcco, q);
+#else
     cudaFree( mcco );
+#endif
 #else
    delete mcco;
 #endif
@@ -220,7 +224,7 @@ void cycleTracking(MonteCarlo *monteCarlo)
                           int runKernel = ThreadBlockLayout( grid, block, numParticles);
 
                           //Call Cycle Tracking Kernel
-                          if( runKernel )
+                          if ( runKernel )
                              CycleTrackingKernel<<<grid, block >>>( monteCarlo, numParticles, processingVault, processedVault );
 
                           //Synchronize the stream so that memory is copied back before we begin MPI section

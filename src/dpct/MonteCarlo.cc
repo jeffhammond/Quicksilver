@@ -29,7 +29,7 @@ MonteCarlo::MonteCarlo(const Parameters& params)
    _nuclearData            = 0;
    _materialDatabase       = 0;
 
-    #if defined (HAVE_UVM)
+#if defined(HAVE_UVM)
         void *ptr1, *ptr2, *ptr3, *ptr4;
 
         ptr1 = (void *)sycl::malloc_shared(sizeof(Tallies), q);
@@ -88,7 +88,7 @@ MonteCarlo::MonteCarlo(const Parameters& params)
     {
         const MaterialParameters& mp = matIter->second;
         double nuBar = params.crossSectionParams.at(mp.fissionCrossSection).nuBar;
-      size_t nb = ceil(nuBar);
+        size_t nb = ceil( nuBar );
         size_t test_size = nb*( batch_size );
 
         if ( test_size > vector_size )
@@ -129,14 +129,14 @@ MonteCarlo::~MonteCarlo()
         fast_timer->~MC_Fast_Timer_Container();
         particle_buffer->~MC_Particle_Buffer();
 
-   sycl::free(_nuclearData, q);
-   sycl::free(_particleVaultContainer, q);
-   sycl::free(_materialDatabase, q);
-   sycl::free(_tallies, q);
-   sycl::free(processor_info, q);
-   sycl::free(time_info, q);
-   sycl::free(fast_timer, q);
-   sycl::free(particle_buffer, q);
+        sycl::free(_nuclearData, q);
+        sycl::free(_particleVaultContainer, q);
+        sycl::free(_materialDatabase, q);
+        sycl::free(_tallies, q);
+        sycl::free(processor_info, q);
+        sycl::free(time_info, q);
+        sycl::free(fast_timer, q);
+        sycl::free(particle_buffer, q);
 
 #else
         delete _nuclearData;
@@ -147,7 +147,7 @@ MonteCarlo::~MonteCarlo()
         delete time_info;
         delete fast_timer;
         delete particle_buffer;
-    #endif
+#endif
 }
 
 void MonteCarlo::clearCrossSectionCache()

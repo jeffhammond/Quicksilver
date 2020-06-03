@@ -214,7 +214,7 @@ void cycleTracking(MonteCarlo *monteCarlo)
                           sycl::range<3> grid(1, 1, 1);
                           sycl::range<3> block(1, 1, 1);
                           int runKernel = ThreadBlockLayout( grid, block, numParticles);
-                          //
+
                           //Call Cycle Tracking Kernel
                           if ( runKernel )
                               q.submit([&](sycl::handler &cgh) {
