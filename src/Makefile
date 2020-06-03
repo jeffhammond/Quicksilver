@@ -188,8 +188,9 @@ CXX       = dpcpp
 CXXFLAGS  = -std=c++14
 CXXFLAGS += -g -O2
 CXXFLAGS += -ferror-limit=1
+CXXFLAGS += -fsycl-targets=spir64_gen-unknown-linux-sycldevice
 CPPFLAGS  = -DHAVE_SYCL
-LDFLAGS   =
+LDFLAGS   = -Xsycl-target-backend=spir64_gen-unknown-linux-sycldevice "-device skl"
 
 ################################################################################
 ### Below here, it is pitch black.                                           ###
