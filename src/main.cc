@@ -213,6 +213,7 @@ void cycleTracking(MonteCarlo *monteCarlo)
                     {
                       case gpuWithCUDA:
                        {
+                          printf("CUDA version running\n");
                           #if defined (HAVE_CUDA)
                           dim3 grid(1,1,1);
                           dim3 block(1,1,1);
@@ -231,6 +232,7 @@ void cycleTracking(MonteCarlo *monteCarlo)
 
                       case gpuWithOpenMP:
                        {
+                          printf("OpenMP GPU version running\n");
                           int nthreads=128;
                           if (numParticles <  64*56 )
                              nthreads = 64;
@@ -256,6 +258,7 @@ void cycleTracking(MonteCarlo *monteCarlo)
 
                       case SYCL:
                        {
+                          printf("SYCL version running\n");
                           const size_t N = numParticles;
                       #ifdef HAVE_SYCL
                           q.submit([&](sycl::handler &h) {
@@ -270,6 +273,7 @@ void cycleTracking(MonteCarlo *monteCarlo)
                        break;
 
                       case cpu:
+                       printf("CPU version running\n");
                        #include "mc_omp_parallel_for_schedule_static.hh"
                        for ( int particle_index = 0; particle_index < numParticles; particle_index++ )
                        {

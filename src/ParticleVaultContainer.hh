@@ -52,7 +52,7 @@ class ParticleVaultContainer
     uint64_t getFirstEmptyProcessedVault();
 
     //Returns a pointer to the Send Queue
-    HOST_DEVICE
+    HOST_DEVICE SYCL_EXTERNAL
     SendQueue* getSendQueue();
     HOST_DEVICE_END
 

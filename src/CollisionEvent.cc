@@ -21,6 +21,13 @@
 //  Return true if the particle will continue.
 //----------------------------------------------------------------------------------------------------------------------
 
+#ifdef HAVE_SYCL
+using sycl::sin;
+using sycl::cos;
+using sycl::sqrt;
+using sycl::log;
+#endif
+
 HOST_DEVICE SYCL_EXTERNAL
 void updateTrajectory( double energy, double angle, MC_Particle& particle )
 {
