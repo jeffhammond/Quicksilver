@@ -194,8 +194,8 @@ CXXFLAGS	+= -O3
 CXXFLAGS	+= -ffast-math
 CXXFLAGS	+= -ferror-limit=3
 
-CXXFLAGS	+= -fsycl
-CXXFLAGS	+= -fsycl-unnamed-lambda
+#CXXFLAGS	+= -fsycl
+#CXXFLAGS	+= -fsycl-unnamed-lambda
 
 # -------------------------------------------------------
 # Intel oneAPI DPC++ compiler that supports Intel devices
@@ -213,9 +213,16 @@ CXXFLAGS	+= -fsycl-unnamed-lambda
 # Intel DPC++ open-source compiler built for NVIDIA
 # -------------------------------------------------------
 DPCPP_DIR	 = /media/disk2/jrhammon/llvm/build
-CXX		 = $(DPCPP_DIR)/bin/clang++
-CXXFLAGS	+= -Wno-unknown-cuda-version
-CXXFLAGS	+= -fsycl-targets=nvptx64-nvidia-cuda-sycldevice
+#CXX		 = $(DPCPP_DIR)/bin/clang++
+#CXXFLAGS	+= -Wno-unknown-cuda-version
+#CXXFLAGS	+= -fsycl-targets=nvptx64-nvidia-cuda-sycldevice
+#LDFLAGS		+= -L$(DPCPP_DIR)/lib -Wl,-rpath=$(DPCPP_DIR)/lib
+
+DPCPP_DIR	 = /media/disk2/jrhammon/hipSYCL/install
+CXX		 = $(DPCPP_DIR)/bin/syclcc
+CXXFLAGS	+= --hipsycl-platform=cuda
+CXXFLAGS	+= --hipsycl-gpu-arch=sm_60
+#CXXFLAGS	+= -fsycl-targets=nvptx64-nvidia-cuda-sycldevice
 LDFLAGS		+= -L$(DPCPP_DIR)/lib -Wl,-rpath=$(DPCPP_DIR)/lib
 
 ################################################################################
